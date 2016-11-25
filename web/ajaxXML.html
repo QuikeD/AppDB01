@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>XML y AJAX</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="js/jquery-3.1.0.min.js" type="text/javascript"></script>
+        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script>
+            $(function () {
+                $.ajax({
+                    type: "GET",
+                    url: "XMLEmpleados",
+                    dataType: "xml",
+                    success: function (xml) {
+                         $(xml).find('empleados').each(function () {
+                            var nombre = $(this).find('nombre').text();
+                            var id = $(this).find('id').text();
+                            var fechaContratacion = $(this).find('fechaC').text();
+                            $("<li></li>").html(nombre + ", " + id + " "+ fechaContratacion).appendTo("#volcado");
+                        });
+                    },
+                    error: function (xhr, stado) {
+                        console.log(xhr)
+                        console.log(stado);
+                    }
+                });
+            });
+
+        </script>
+    </head>
+    <body>
+        <div id="volcado">TODO write content</div>
+    </body>
+  
+</html>
+  <!-- jQuery -->
+   
